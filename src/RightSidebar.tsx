@@ -1,14 +1,8 @@
 import React, {useState, useRef} from 'react'
-// @ts-ignore
-import {useRecoilState, useRecoilValue, selector} from 'recoil'
-import {canvasColorState} from './Canvas'
 import {Sidebar, Title} from './ui'
 import {SketchPicker} from 'react-color'
 import styled from 'styled-components'
 import useOnClickOutside from 'use-onclickoutside'
-import {selectedElementsState} from './elementsState'
-import {elementState} from './Element'
-import produce from 'immer'
 
 const Color = styled.div`
     width: 40px;
@@ -22,24 +16,6 @@ const Popover = styled.div`
     top: 5px;
     left: 0;
 `
-
-const selectedElementState = selector({
-    key: 'selectedElement',
-    get: ({get}: any) => {
-        const selectedElements = get(selectedElementsState)
-        if (selectedElements.length === 1) {
-            return get(elementState(selectedElements[0]))
-        }
-
-        return null
-    },
-    set: ({set, get}: any, newValue: any) => {
-        const selectedElements = get(selectedElementsState)
-        if (selectedElements.length === 1) {
-            set(elementState(selectedElements[0]), newValue)
-        }
-    },
-})
 
 const ColorPicker: React.FC<{value: string; onChange: (value: string) => void}> = ({value, onChange}) => {
     const [pickerVisible, setPickerVisible] = useState(false)
@@ -94,7 +70,7 @@ const PropertyInput: React.FC<{label: string; value: number; onChange: (value: n
 }
 
 const Properties: React.FC = () => {
-    const [selectedElement, setSelectedElement] = useRecoilState(selectedElementState)
+    const [selectedElement, setSelectedElement] = useState<number | undefined>()
 
     if (!selectedElement) return null
 
@@ -103,46 +79,30 @@ const Properties: React.FC = () => {
             <Title>Properties</Title>
             <PropertyInput
                 label="Top"
-                value={selectedElement.position.top}
+                value={0}
                 onChange={(value) => {
-                    setSelectedElement(
-                        produce((draftState) => {
-                            draftState.position.top = value
-                        }),
-                    )
+                    console.log('onChange Top', value)
                 }}
             />
             <PropertyInput
                 label="Left"
-                value={selectedElement.position.left}
+                value={0}
                 onChange={(value) => {
-                    setSelectedElement(
-                        produce((draftState) => {
-                            draftState.position.left = value
-                        }),
-                    )
+                    console.log('onChange Left', value)
                 }}
             />
             <PropertyInput
                 label="Width"
-                value={selectedElement.size.width}
+                value={0}
                 onChange={(value) => {
-                    setSelectedElement(
-                        produce((draftState) => {
-                            draftState.size.width = value
-                        }),
-                    )
+                    console.log('onChange Width', value)
                 }}
             />
             <PropertyInput
                 label="Height"
-                value={selectedElement.size.height}
+                value={0}
                 onChange={(value) => {
-                    setSelectedElement(
-                        produce((draftState) => {
-                            draftState.size.height = value
-                        }),
-                    )
+                    console.log('onChange Height', value)
                 }}
             />
         </>
@@ -150,7 +110,7 @@ const Properties: React.FC = () => {
 }
 
 export const RightSidebar: React.FC = () => {
-    const [canvasColor, setCanvasColor] = useRecoilState(canvasColorState)
+    const [canvasColor, setCanvasColor] = useState('#101010')
 
     return (
         <Sidebar>

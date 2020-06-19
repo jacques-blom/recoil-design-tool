@@ -1,13 +1,7 @@
-import React from 'react'
-import {
-    useRecoilState,
-    // @ts-ignore
-} from 'recoil'
+import React, {useState} from 'react'
 import {Sidebar, Title} from './ui'
-import styled, {css} from 'styled-components'
-import {elementState, isSelectedState} from './Element'
+import styled from 'styled-components'
 import {FiSquare, FiImage} from 'react-icons/fi'
-import {elementsState, selectedElementsState} from './elementsState'
 
 const InsertButton = styled.button`
     width: 40px;
@@ -22,47 +16,8 @@ const InsertButton = styled.button`
     border: 0;
 `
 
-const ElementLayerContainer = styled.button<{selected: boolean}>`
-    margin: 0;
-    padding: 0;
-    border: 0;
-    padding: 10px;
-    background-color: transparent;
-    border-radius: 3px;
-    font-size: 16px;
-    color: #fff;
-    width: 100%;
-    margin-bottom: 10px;
-    text-align: left;
-
-    ${(props) =>
-        props.selected &&
-        css`
-            background-color: #565656;
-        `}
-`
-
-const ElementLayer: React.FC<{id: number}> = ({id}) => {
-    const [element] = useRecoilState(elementState(id))
-    const [isSelected, setSelected] = useRecoilState(isSelectedState(id))
-
-    return (
-        <ElementLayerContainer
-            selected={isSelected}
-            onClick={() => {
-                setSelected(!isSelected)
-            }}
-        >
-            {element.label}
-        </ElementLayerContainer>
-    )
-}
-
 export const LeftSidebar: React.FC = () => {
-    const [elements, setElements] = useRecoilState(elementsState)
-    const [selectedElements] = useRecoilState(selectedElementsState)
-
-    console.log('selectedElements', selectedElements)
+    const [elements, setElements] = useState<number[]>([])
 
     return (
         <Sidebar>
@@ -82,11 +37,6 @@ export const LeftSidebar: React.FC = () => {
                     <FiImage color="white" size={30} />
                 </InsertButton>
             </div>
-            <div style={{height: 20}} />
-            <Title>Layers</Title>
-            {elements.map((element: number) => (
-                <ElementLayer key={element} id={element} />
-            ))}
         </Sidebar>
     )
 }

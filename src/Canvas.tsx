@@ -1,14 +1,6 @@
-import React from 'react'
-// @ts-ignore
-import {useRecoilState, useRecoilValue, atom, useSetRecoilState} from 'recoil'
-import {Element} from './Element'
+import React, {useState} from 'react'
 import styled from 'styled-components'
-import {elementsState, selectedElementsState} from './elementsState'
-
-export const canvasColorState = atom({
-    key: 'canvasColor',
-    default: '#1d1e1f',
-})
+import {Element} from './Element'
 
 const CanvasContainer = styled.div`
     flex: 1;
@@ -16,20 +8,19 @@ const CanvasContainer = styled.div`
 `
 
 export const Canvas: React.FC = ({children}) => {
-    const backgroundColor = useRecoilValue(canvasColorState)
-    const [elements] = useRecoilState(elementsState)
-    const setSelected = useSetRecoilState(selectedElementsState)
+    const [backgroundColor] = useState('#101010')
+    const [elements] = useState<number[]>([])
 
     return (
         <CanvasContainer
             style={{backgroundColor}}
             onClick={(e) => {
                 if (e.target === e.currentTarget) {
-                    setSelected([])
+                    // Deselect all elements
                 }
             }}
         >
-            {elements.map((element: number) => {
+            {elements.map((element) => {
                 return <Element key={element} id={element} />
             })}
             {children}

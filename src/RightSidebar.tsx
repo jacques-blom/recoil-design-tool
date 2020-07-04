@@ -1,42 +1,7 @@
-import React, {useState, useRef} from 'react'
+import React, {useContext} from 'react'
 import {Sidebar, Title} from './ui'
-import {SketchPicker} from 'react-color'
 import styled from 'styled-components'
-import useOnClickOutside from 'use-onclickoutside'
-
-const Color = styled.div`
-    width: 40px;
-    height: 30px;
-    border-radius: 3px;
-    border: 1px solid #ccc;
-`
-
-const Popover = styled.div`
-    position: absolute;
-    top: 5px;
-    left: 0;
-`
-
-const ColorPicker: React.FC<{value: string; onChange: (value: string) => void}> = ({value, onChange}) => {
-    const [pickerVisible, setPickerVisible] = useState(false)
-    const ref = useRef<HTMLDivElement>(null)
-    useOnClickOutside(ref, () => setPickerVisible(false))
-
-    return (
-        <div>
-            <div ref={ref} style={{display: 'inline-block'}}>
-                <Color style={{backgroundColor: value}} onClick={() => setPickerVisible(!pickerVisible)} />
-                <div style={{position: 'relative'}}>
-                    {pickerVisible && (
-                        <Popover>
-                            <SketchPicker color={value} onChange={({hex}) => onChange(hex)} />
-                        </Popover>
-                    )}
-                </div>
-            </div>
-        </div>
-    )
-}
+import {ElementsContext} from './App'
 
 const InputLabel = styled.div`
     font-weight: 500;
@@ -45,8 +10,8 @@ const InputLabel = styled.div`
 `
 
 const Input = styled.input`
-    background-color: #565656;
-    border-radius: 3px;
+    background-color: rgba(10, 10, 10, 0.3);
+    border-radius: 15px;
     padding: 10px;
     border: 0;
     width: 100%;
@@ -70,7 +35,9 @@ const PropertyInput: React.FC<{label: string; value: number; onChange: (value: n
 }
 
 const Properties: React.FC = () => {
-    const [selectedElement, setSelectedElement] = useState<number | undefined>()
+    const {selectedElement: selectedElementId, elements, setElements} = useContext(ElementsContext)
+
+    const selectedElement = elements.find((element) => element.id === selectedElementId)
 
     if (!selectedElement) return null
 
@@ -79,30 +46,32 @@ const Properties: React.FC = () => {
             <Title>Properties</Title>
             <PropertyInput
                 label="Top"
-                value={0}
-                onChange={(value) => {
-                    console.log('onChange Top', value)
+                value={selectedElement.top}
+                onChange={(top) => {
+                    setElements(
+                        elements.map((el) => {
+                            if (el.id === selectedElement.id) {
+                                return {...el, top}
+                            } else {
+                                return el
+                            }
+                        }),
+                    )
                 }}
             />
             <PropertyInput
                 label="Left"
-                value={0}
-                onChange={(value) => {
-                    console.log('onChange Left', value)
-                }}
-            />
-            <PropertyInput
-                label="Width"
-                value={0}
-                onChange={(value) => {
-                    console.log('onChange Width', value)
-                }}
-            />
-            <PropertyInput
-                label="Height"
-                value={0}
-                onChange={(value) => {
-                    console.log('onChange Height', value)
+                value={selectedElement.left}
+                onChange={(left) => {
+                    setElements(
+                        elements.map((el) => {
+                            if (el.id === selectedElement.id) {
+                                return {...el, left}
+                            } else {
+                                return el
+                            }
+                        }),
+                    )
                 }}
             />
         </>
@@ -110,13 +79,8 @@ const Properties: React.FC = () => {
 }
 
 export const RightSidebar: React.FC = () => {
-    const [canvasColor, setCanvasColor] = useState('#101010')
-
     return (
         <Sidebar>
-            <Title>Canvas Background</Title>
-            <ColorPicker value={canvasColor} onChange={setCanvasColor} />
-            <div style={{height: 20}} />
             <Properties />
         </Sidebar>
     )

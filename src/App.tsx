@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 
 import {Canvas} from './Canvas'
@@ -13,14 +13,41 @@ const Container = styled.div`
     height: 100vh;
 `
 
+type Element = {
+    id: number
+    top: number
+    left: number
+}
+
+type SelectedElement = number | undefined
+
+type ElementsContext = {
+    elements: Element[]
+    setElements: React.Dispatch<React.SetStateAction<Element[]>>
+    selectedElement: SelectedElement
+    setSelectedElement: React.Dispatch<React.SetStateAction<number | undefined>>
+}
+
+export const ElementsContext = React.createContext<ElementsContext>({
+    elements: [],
+    setElements: () => {},
+    selectedElement: undefined,
+    setSelectedElement: () => {},
+})
+
 const App: React.FC = () => {
+    const [elements, setElements] = useState<Element[]>([])
+    const [selectedElement, setSelectedElement] = useState<number | undefined>()
+
     return (
-        <Container>
-            <LeftSidebar />
-            <Canvas />
-            <RightSidebar />
-            <GlobalStyles />
-        </Container>
+        <ElementsContext.Provider value={{elements, setElements, selectedElement, setSelectedElement}}>
+            <Container>
+                <LeftSidebar />
+                <Canvas />
+                <RightSidebar />
+                <GlobalStyles />
+            </Container>
+        </ElementsContext.Provider>
     )
 }
 

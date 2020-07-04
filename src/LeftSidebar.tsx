@@ -1,13 +1,14 @@
-import React, {useState} from 'react'
+import React, {useContext} from 'react'
 import {Sidebar, Title} from './ui'
 import styled from 'styled-components'
 import {FiSquare, FiImage} from 'react-icons/fi'
+import {ElementsContext} from './App'
 
 const InsertButton = styled.button`
-    width: 40px;
-    height: 40px;
-    background-color: #565656;
-    border-radius: 3px;
+    width: 60px;
+    height: 60px;
+    background-color: rgba(10, 10, 10, 0.3);
+    border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,7 +18,7 @@ const InsertButton = styled.button`
 `
 
 export const LeftSidebar: React.FC = () => {
-    const [elements, setElements] = useState<number[]>([])
+    const {setElements} = useContext(ElementsContext)
 
     return (
         <Sidebar>
@@ -25,16 +26,23 @@ export const LeftSidebar: React.FC = () => {
             <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
                 <InsertButton
                     onClick={() => {
-                        setElements((elements: number[]) => {
-                            return [...elements, elements.length]
+                        setElements((elements) => {
+                            return [
+                                ...elements,
+                                {
+                                    id: elements.length,
+                                    top: 0,
+                                    left: 0,
+                                },
+                            ]
                         })
                     }}
                 >
-                    <FiSquare color="white" size={30} />
+                    <FiSquare color="white" size={35} />
                 </InsertButton>
                 <div style={{width: 15}} />
                 <InsertButton>
-                    <FiImage color="white" size={30} />
+                    <FiImage color="white" size={35} />
                 </InsertButton>
             </div>
         </Sidebar>

@@ -19,6 +19,7 @@ const InnerContainer = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 `
@@ -38,7 +39,10 @@ export const Element: React.FC<ElementProps> = () => {
                     setLeft(left + e.movementX)
                 }}
             >
-                <InnerContainer />
+                <InnerContainer>
+                    <div>Top: {top}</div>
+                    <div>Left: {left}</div>
+                </InnerContainer>
             </DraggableCore>
         </Container>
     )

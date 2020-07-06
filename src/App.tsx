@@ -13,35 +13,21 @@ const Container = styled.div`
     height: 100vh;
 `
 
-type Element = {
-    id: number
-    top: number
-    left: number
-    color: string
-}
-
-type SelectedElement = number | undefined
-
 type ElementsContext = {
-    elements: Element[]
-    setElements: React.Dispatch<React.SetStateAction<Element[]>>
-    selectedElement: SelectedElement
-    setSelectedElement: React.Dispatch<React.SetStateAction<number | undefined>>
+    elements: number[]
+    setElements: React.Dispatch<React.SetStateAction<number[]>>
 }
 
 export const ElementsContext = React.createContext<ElementsContext>({
     elements: [],
     setElements: () => {},
-    selectedElement: undefined,
-    setSelectedElement: () => {},
 })
 
 const App: React.FC = () => {
-    const [elements, setElements] = useState<Element[]>([])
-    const [selectedElement, setSelectedElement] = useState<number | undefined>()
+    const [elements, setElements] = useState<number[]>([])
 
     return (
-        <ElementsContext.Provider value={{elements, setElements, selectedElement, setSelectedElement}}>
+        <ElementsContext.Provider value={{elements, setElements}}>
             <Container>
                 <LeftSidebar />
                 <Canvas />

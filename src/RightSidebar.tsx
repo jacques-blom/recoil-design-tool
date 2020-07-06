@@ -1,7 +1,6 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import {Sidebar, Title} from './ui'
 import styled from 'styled-components'
-import {ElementsContext} from './App'
 import {ColorPicker} from './ColorPicker'
 
 const InputLabel = styled.div`
@@ -36,9 +35,7 @@ const PropertyInput: React.FC<{label: string; value: number; onChange: (value: n
 }
 
 const Properties: React.FC = () => {
-    const {selectedElement: selectedElementId, elements, setElements} = useContext(ElementsContext)
-
-    const selectedElement = elements.find((element) => element.id === selectedElementId)
+    const selectedElement = null
 
     if (!selectedElement) return null
 
@@ -46,50 +43,9 @@ const Properties: React.FC = () => {
         <>
             <Title>Properties</Title>
             <InputLabel>Color</InputLabel>
-            <ColorPicker
-                value={selectedElement.color}
-                onChange={(color) => {
-                    setElements(
-                        elements.map((el) => {
-                            if (el.id === selectedElement.id) {
-                                return {...el, color}
-                            } else {
-                                return el
-                            }
-                        }),
-                    )
-                }}
-            />
-            <PropertyInput
-                label="Top"
-                value={selectedElement.top}
-                onChange={(top) => {
-                    setElements(
-                        elements.map((el) => {
-                            if (el.id === selectedElement.id) {
-                                return {...el, top}
-                            } else {
-                                return el
-                            }
-                        }),
-                    )
-                }}
-            />
-            <PropertyInput
-                label="Left"
-                value={selectedElement.left}
-                onChange={(left) => {
-                    setElements(
-                        elements.map((el) => {
-                            if (el.id === selectedElement.id) {
-                                return {...el, left}
-                            } else {
-                                return el
-                            }
-                        }),
-                    )
-                }}
-            />
+            <ColorPicker value="#FFF" onChange={(color) => {}} />
+            <PropertyInput label="Top" value={0} onChange={(top) => {}} />
+            <PropertyInput label="Left" value={0} onChange={(left) => {}} />
         </>
     )
 }

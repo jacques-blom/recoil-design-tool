@@ -1,7 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {DraggableCore} from 'react-draggable'
 import styled from 'styled-components'
 import hexToRgba from 'hex-to-rgba'
+// @ts-ignore
+import randomMC from 'random-material-color'
 
 const Container = styled.div`
     position: absolute;
@@ -21,18 +23,21 @@ const InnerContainer = styled.div`
     justify-content: center;
 `
 
-type ElementProps = {
-    top: number
-    left: number
-    color: string
-    onDrag: (top: number, left: number) => void
-    onSelect: () => void
-}
+type ElementProps = {}
 
-export const Element: React.FC<ElementProps> = ({top, left, color, onDrag, onSelect}) => {
+export const Element: React.FC<ElementProps> = () => {
+    const [top, setTop] = useState(0)
+    const [left, setLeft] = useState(0)
+    const [color] = useState(randomMC.getColor())
+
     return (
-        <Container style={{top, left, backgroundColor: hexToRgba(color, 0.45)}} onMouseDown={onSelect}>
-            <DraggableCore onDrag={(e: any) => onDrag(top + e.movementY, left + e.movementX)}>
+        <Container style={{top, left, backgroundColor: hexToRgba(color, 0.45)}}>
+            <DraggableCore
+                onDrag={(e: any) => {
+                    setTop(top + e.movementY)
+                    setLeft(left + e.movementX)
+                }}
+            >
                 <InnerContainer />
             </DraggableCore>
         </Container>

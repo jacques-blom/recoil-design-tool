@@ -3,8 +3,6 @@ import {Sidebar, Title} from './ui'
 import styled from 'styled-components'
 import {FiSquare, FiImage} from 'react-icons/fi'
 import {ElementsContext} from './App'
-// @ts-ignore
-import randomMC from 'random-material-color'
 
 const InsertButton = styled.button`
     width: 60px;
@@ -28,17 +26,7 @@ export const LeftSidebar: React.FC = () => {
             <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
                 <InsertButton
                     onClick={() => {
-                        setElements((elements) => {
-                            return [
-                                ...elements,
-                                {
-                                    id: elements.length,
-                                    top: 0,
-                                    left: 0,
-                                    color: randomMC.getColor(),
-                                },
-                            ]
-                        })
+                        setElements((elements) => [...elements, elements.length])
                     }}
                 >
                     <FiSquare color="white" size={35} />

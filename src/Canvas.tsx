@@ -9,35 +9,12 @@ const CanvasContainer = styled.div`
 `
 
 export const Canvas: React.FC = () => {
-    const {elements, setSelectedElement, setElements} = useContext(ElementsContext)
+    const {elements} = useContext(ElementsContext)
 
     return (
         <CanvasContainer>
             {elements.map((element) => {
-                return (
-                    <Element
-                        key={element.id}
-                        top={element.top}
-                        left={element.left}
-                        color={element.color}
-                        onDrag={(top, left) => {
-                            setElements(
-                                elements.map((el) => {
-                                    if (el.id === element.id) {
-                                        return {
-                                            ...el,
-                                            top,
-                                            left,
-                                        }
-                                    } else {
-                                        return el
-                                    }
-                                }),
-                            )
-                        }}
-                        onSelect={() => setSelectedElement(element.id)}
-                    />
-                )
+                return <Element key={element} />
             })}
         </CanvasContainer>
     )

@@ -21,16 +21,6 @@ const InnerContainer = styled.div`
     justify-content: center;
 `
 
-const Label = styled.input`
-    background-color: transparent;
-    width: 100%;
-    border: 0;
-    font-size: 17px;
-    outline: none;
-    text-align: center;
-    color: #fff;
-`
-
 type ElementProps = {
     top: number
     left: number

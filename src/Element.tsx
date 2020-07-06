@@ -1,6 +1,7 @@
 import React from 'react'
 import {DraggableCore} from 'react-draggable'
 import styled from 'styled-components'
+import hexToRgba from 'hex-to-rgba'
 
 const Container = styled.div`
     position: absolute;
@@ -8,8 +9,8 @@ const Container = styled.div`
     border-radius: 20px;
     width: 200px;
     height: 170px;
-    background-color: rgba(60, 60, 60, 0.4);
-    backdrop-filter: blur(20px);
+    background-color: rgba(17, 17, 17, 0.45);
+    backdrop-filter: blur(30px);
 `
 
 const InnerContainer = styled.div`
@@ -33,17 +34,16 @@ const Label = styled.input`
 type ElementProps = {
     top: number
     left: number
+    color: string
     onDrag: (top: number, left: number) => void
     onSelect: () => void
 }
 
-export const Element: React.FC<ElementProps> = ({top, left, onDrag, onSelect}) => {
+export const Element: React.FC<ElementProps> = ({top, left, color, onDrag, onSelect}) => {
     return (
-        <Container style={{top, left}} onMouseDown={onSelect}>
+        <Container style={{top, left, backgroundColor: hexToRgba(color, 0.45)}} onMouseDown={onSelect}>
             <DraggableCore onDrag={(e: any) => onDrag(top + e.movementY, left + e.movementX)}>
-                <InnerContainer>
-                    <Label value="Hello world" />
-                </InnerContainer>
+                <InnerContainer />
             </DraggableCore>
         </Container>
     )

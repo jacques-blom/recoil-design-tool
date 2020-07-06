@@ -2,6 +2,7 @@ import React, {useContext} from 'react'
 import {Sidebar, Title} from './ui'
 import styled from 'styled-components'
 import {ElementsContext} from './App'
+import {ColorPicker} from './ColorPicker'
 
 const InputLabel = styled.div`
     font-weight: 500;
@@ -44,6 +45,21 @@ const Properties: React.FC = () => {
     return (
         <>
             <Title>Properties</Title>
+            <InputLabel>Color</InputLabel>
+            <ColorPicker
+                value={selectedElement.color}
+                onChange={(color) => {
+                    setElements(
+                        elements.map((el) => {
+                            if (el.id === selectedElement.id) {
+                                return {...el, color}
+                            } else {
+                                return el
+                            }
+                        }),
+                    )
+                }}
+            />
             <PropertyInput
                 label="Top"
                 value={selectedElement.top}

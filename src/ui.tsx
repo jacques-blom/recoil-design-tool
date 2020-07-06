@@ -3,8 +3,7 @@ import styled, {createGlobalStyle} from 'styled-components'
 export const Sidebar = styled.div`
     width: 300px;
     height: 100%;
-    background-color: rgba(70, 70, 70, 0.5);
-    backdrop-filter: blur(15px);
+    background-color: rgba(70, 70, 70, 1);
     padding: 20px;
 `
 
@@ -23,9 +22,6 @@ export const GlobalStyles = createGlobalStyle`
             sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        background-image: url('/bg.jpg');
-        background-size: cover;
-        background-position: center;
     }
 
     * {

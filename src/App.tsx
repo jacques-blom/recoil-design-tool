@@ -17,6 +17,7 @@ type Element = {
     id: number
     top: number
     left: number
+    color: string
 }
 
 type SelectedElement = number | undefined

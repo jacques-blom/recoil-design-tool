@@ -19,6 +19,7 @@ export const Canvas: React.FC = () => {
                         key={element.id}
                         top={element.top}
                         left={element.left}
+                        color={element.color}
                         onDrag={(top, left) => {
                             setElements(
                                 elements.map((el) => {

@@ -2,7 +2,9 @@
 
 A simple design tool to showcase [Recoil's](https://recoiljs.org/) atomFamily.
 
-Find the [tutorial video here](https://www.youtube.com/watch?v=KBE7Ezn7h0A).
+Find the [tutorial video here](https://www.youtube.com/watch?v=KBE7Ezn7h0A):
+
+<a href="https://www.youtube.com/watch?v=KBE7Ezn7h0A"><img alt="Click here for the tutorial video" src="https://raw.githubusercontent.com/jacques-blom/recoil-design-tool/01-context/video.png" width="300" /></a>
 
 ## To get started
 

@@ -2,6 +2,8 @@ import React from 'react'
 import {Sidebar, Title} from './ui'
 import styled from 'styled-components'
 import {ColorPicker} from './ColorPicker'
+import {useRecoilState, selector} from 'recoil'
+import {selectedElementIdState, elementState, ElementState} from './Element'
 
 const InputLabel = styled.div`
     font-weight: 500;
@@ -34,19 +36,63 @@ const PropertyInput: React.FC<{label: string; value: number; onChange: (value: n
     )
 }
 
+const selectedElementState = selector<ElementState | undefined>({
+    key: 'selectedElement',
+    get: ({get}) => {
+        const id = get(selectedElementIdState)
+
+        if (id != null) {
+            return get(elementState(id))
+        }
+    },
+    set: ({set, get}, newElementValue) => {
+        const id = get(selectedElementIdState)
+
+        if (id != null && newElementValue) {
+            set(elementState(id), newElementValue)
+        }
+    },
+})
+
 const Properties: React.FC = () => {
-    const selectedElement = null
+    const [selectedElement, setSelectedElement] = useRecoilState(selectedElementState)
 
     if (!selectedElement) return null
 
     return (
-        <>
+        <div>
             <Title>Properties</Title>
             <InputLabel>Color</InputLabel>
-            <ColorPicker value="#FFF" onChange={(color) => {}} />
-            <PropertyInput label="Top" value={0} onChange={(top) => {}} />
-            <PropertyInput label="Left" value={0} onChange={(left) => {}} />
-        </>
+            <ColorPicker
+                value={selectedElement.color}
+                onChange={(color) => {
+                    setSelectedElement({
+                        ...selectedElement,
+                        color,
+                    })
+                }}
+            />
+            <PropertyInput
+                label="Top"
+                value={selectedElement.top}
+                onChange={(top) => {
+                    setSelectedElement({
+                        ...selectedElement,
+                        top,
+                    })
+                }}
+            />
+            <PropertyInput
+                label="Left"
+                value={selectedElement.left}
+                onChange={(left) => {
+                    setSelectedElement({
+                        ...selectedElement,
+                        left,
+                    })
+                }}
+            />
+        </div>
     )
 }
 

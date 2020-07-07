@@ -5,6 +5,7 @@ import {Canvas} from './Canvas'
 import {LeftSidebar} from './LeftSidebar'
 import {RightSidebar} from './RightSidebar'
 import {GlobalStyles} from './ui'
+import {RecoilRoot} from 'recoil'
 
 const Container = styled.div`
     display: flex;
@@ -39,7 +40,11 @@ const App: React.FC = () => {
 }
 
 function Root() {
-    return <App />
+    return (
+        <RecoilRoot>
+            <App />
+        </RecoilRoot>
+    )
 }
 
 export default Root

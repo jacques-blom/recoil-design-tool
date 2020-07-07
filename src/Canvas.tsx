@@ -14,7 +14,7 @@ export const Canvas: React.FC = () => {
     return (
         <CanvasContainer>
             {elements.map((element) => {
-                return <Element key={element} />
+                return <Element key={element} id={element} />
             })}
         </CanvasContainer>
     )

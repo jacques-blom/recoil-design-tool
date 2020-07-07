@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import hexToRgba from 'hex-to-rgba'
 // @ts-ignore
 import randomMC from 'random-material-color'
+import {atomFamily, useRecoilState, atom, useSetRecoilState} from 'recoil'
 
 const Container = styled.div`
     position: absolute;
@@ -24,24 +25,51 @@ const InnerContainer = styled.div`
     justify-content: center;
 `
 
-type ElementProps = {}
+type ElementProps = {
+    id: number
+}
 
-export const Element: React.FC<ElementProps> = () => {
-    const [top, setTop] = useState(0)
-    const [left, setLeft] = useState(0)
-    const [color] = useState(randomMC.getColor())
+export type ElementState = {
+    top: number
+    left: number
+    color: string
+}
+
+export const elementState = atomFamily({
+    key: 'element',
+    default: () => ({
+        top: 0,
+        left: 0,
+        color: randomMC.getColor(),
+    }),
+})
+
+export const selectedElementIdState = atom<null | number>({
+    key: 'selectedElementId',
+    default: null,
+})
+
+export const Element: React.FC<ElementProps> = ({id}) => {
+    const [element, setElement] = useRecoilState(elementState(id))
+    const setSelectedElement = useSetRecoilState(selectedElementIdState)
 
     return (
-        <Container style={{top, left, backgroundColor: hexToRgba(color, 0.45)}}>
+        <Container
+            style={{top: element.top, left: element.left, backgroundColor: hexToRgba(element.color, 0.45)}}
+            onMouseDown={() => setSelectedElement(id)}
+        >
             <DraggableCore
                 onDrag={(e: any) => {
-                    setTop(top + e.movementY)
-                    setLeft(left + e.movementX)
+                    setElement({
+                        ...element,
+                        top: element.top + e.movementY,
+                        left: element.left + e.movementX,
+                    })
                 }}
             >
                 <InnerContainer>
-                    <div>Top: {top}</div>
-                    <div>Left: {left}</div>
+                    <div>Top: {element.top}</div>
+                    <div>Left: {element.left}</div>
                 </InnerContainer>
             </DraggableCore>
         </Container>

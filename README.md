@@ -1,4 +1,4 @@
-# 🦸‍♂️ Taskmaster
+# 🚀 Recoil Design Tool - Example App
 
 A simple design tool to showcase [Recoil's](https://recoiljs.org/) atomFamily.
 

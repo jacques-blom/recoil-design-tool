@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {DraggableCore} from 'react-draggable'
 import styled from 'styled-components'
 import hexToRgba from 'hex-to-rgba'

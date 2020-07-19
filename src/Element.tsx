@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import styled, {css} from 'styled-components'
 import hexToRgba from 'hex-to-rgba'
-import {useRecoilState, useSetRecoilState, useRecoilValue} from 'recoil'
+import {useSetRecoilState, useRecoilValue} from 'recoil'
 import {Resizable} from './Resizable'
 import {elementState, selectedElementIdState, isSelectedState} from './state'
 import {Draggable} from './Draggable'
@@ -39,7 +39,7 @@ type ElementProps = {
 }
 
 export const Element: React.FC<ElementProps> = ({id}) => {
-    const [element, setElement] = useRecoilState(elementState(id))
+    const element = useRecoilValue(elementState(id))
     const [mouseDown, setMouseDown] = useState(false)
     const setSelectedElement = useSetRecoilState(selectedElementIdState)
     const isSelected = useRecoilValue(isSelectedState(id))

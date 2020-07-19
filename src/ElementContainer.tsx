@@ -29,6 +29,8 @@ const InnerContainer = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    border-radius: 20px;
 `
 
 type ElementProps = {

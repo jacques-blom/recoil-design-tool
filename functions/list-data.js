@@ -6,7 +6,7 @@ const run = async () => {
 exports.handler = async function () {
     try {
         const body = await run()
-        return {statusCode: 200, body}
+        return {statusCode: 200, body: JSON.stringify(body)}
     } catch (error) {
         console.error(error)
 

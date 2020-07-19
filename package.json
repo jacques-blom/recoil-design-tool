@@ -35,7 +35,8 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "list-data": "LOCAL_TEST=true node functions/list-data.js"
+        "list-data": "LOCAL_TEST=true node functions/list-data.js",
+        "random-image": "LOCAL_TEST=true node functions/random-image.js"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -51,5 +52,10 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "@types/aws-sdk": "^2.7.0",
+        "aws-sdk": "^2.715.0",
+        "axios": "^0.19.2"
     }
 }

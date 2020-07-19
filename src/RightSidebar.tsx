@@ -3,7 +3,7 @@ import {Sidebar, Title} from './ui'
 import styled from 'styled-components'
 import {ColorPicker} from './ColorPicker'
 import {useRecoilState, selector} from 'recoil'
-import {selectedElementIdState, elementState, ElementState} from './Element'
+import {selectedElementIdState, elementState, ElementState} from './state'
 
 const InputLabel = styled.div`
     font-weight: 500;
@@ -76,21 +76,41 @@ const Properties: React.FC = () => {
             )}
             <PropertyInput
                 label="Top"
-                value={selectedElement.top}
+                value={selectedElement.style.top}
                 onChange={(top) => {
                     setSelectedElement({
                         ...selectedElement,
-                        top,
+                        style: {...selectedElement.style, top},
                     })
                 }}
             />
             <PropertyInput
                 label="Left"
-                value={selectedElement.left}
+                value={selectedElement.style.left}
                 onChange={(left) => {
                     setSelectedElement({
                         ...selectedElement,
-                        left,
+                        style: {...selectedElement.style, left},
+                    })
+                }}
+            />
+            <PropertyInput
+                label="Width"
+                value={selectedElement.style.width}
+                onChange={(width) => {
+                    setSelectedElement({
+                        ...selectedElement,
+                        style: {...selectedElement.style, width},
+                    })
+                }}
+            />
+            <PropertyInput
+                label="Height"
+                value={selectedElement.style.height}
+                onChange={(height) => {
+                    setSelectedElement({
+                        ...selectedElement,
+                        style: {...selectedElement.style, height},
                     })
                 }}
             />

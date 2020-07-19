@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {DraggableCore} from 'react-draggable'
 import styled from 'styled-components'
 import hexToRgba from 'hex-to-rgba'
@@ -8,12 +8,12 @@ import {atomFamily, useRecoilState, atom, useSetRecoilState} from 'recoil'
 
 const Container = styled.div`
     position: absolute;
-    box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
     border-radius: 20px;
     width: 200px;
     height: 170px;
-    background-color: rgba(17, 17, 17, 0.45);
-    backdrop-filter: blur(30px);
+    backdrop-filter: blur(10px);
+    transition: 0.2s transform ease-in-out, 0.2s box-shadow ease-in-out;
 `
 
 const InnerContainer = styled.div`
@@ -50,7 +50,7 @@ export const elementState = atomFamily<ElementState, number>({
         type: 'rectangle',
         top: 0,
         left: 0,
-        color: randomMC.getColor(),
+        color: randomMC.getColor({shades: ['500']}),
     }),
 })
 
@@ -61,14 +61,27 @@ export const selectedElementIdState = atom<null | number>({
 
 export const Element: React.FC<ElementProps> = ({id}) => {
     const [element, setElement] = useRecoilState(elementState(id))
+    const [mouseDown, setMouseDown] = useState(false)
     const setSelectedElement = useSetRecoilState(selectedElementIdState)
 
     if (element.type !== 'rectangle') return null
 
     return (
         <Container
-            style={{top: element.top, left: element.left, backgroundColor: hexToRgba(element.color, 0.45)}}
-            onMouseDown={() => setSelectedElement(id)}
+            style={{
+                top: element.top,
+                left: element.left,
+                backgroundColor: hexToRgba(element.color, 0.6),
+                transform: `scale(${mouseDown ? 1.1 : 1})`,
+                boxShadow: mouseDown ? `0 8px 20px 0 rgba(0, 0, 0, 0.2)` : undefined,
+            }}
+            onMouseDown={() => {
+                setMouseDown(true)
+                setSelectedElement(id)
+            }}
+            onMouseUp={() => {
+                setMouseDown(false)
+            }}
         >
             <DraggableCore
                 onDrag={(e: any) => {

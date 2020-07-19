@@ -16,7 +16,7 @@ type RectangleState = {
 
 type ImageState = {
     type: 'image'
-    url: string | null
+    src: string
 }
 
 export type ElementState = {

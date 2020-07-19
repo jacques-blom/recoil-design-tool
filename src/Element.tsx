@@ -84,6 +84,7 @@ export const Element: React.FC<ElementProps> = ({id}) => {
             }}
         >
             <DraggableCore
+                scale={mouseDown ? 1.1 : 1}
                 onDrag={(e: any) => {
                     setElement({
                         ...element,

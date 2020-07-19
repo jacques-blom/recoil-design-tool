@@ -63,15 +63,17 @@ const Properties: React.FC = () => {
         <div>
             <Title>Properties</Title>
             <InputLabel>Color</InputLabel>
-            <ColorPicker
-                value={selectedElement.color}
-                onChange={(color) => {
-                    setSelectedElement({
-                        ...selectedElement,
-                        color,
-                    })
-                }}
-            />
+            {selectedElement.type === 'rectangle' && (
+                <ColorPicker
+                    value={selectedElement.color}
+                    onChange={(color) => {
+                        setSelectedElement({
+                            ...selectedElement,
+                            color,
+                        })
+                    }}
+                />
+            )}
             <PropertyInput
                 label="Top"
                 value={selectedElement.top}

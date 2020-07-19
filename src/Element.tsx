@@ -29,15 +29,25 @@ type ElementProps = {
     id: number
 }
 
-export type ElementState = {
-    top: number
-    left: number
+type RectangleState = {
+    type: 'rectangle'
     color: string
 }
 
-export const elementState = atomFamily({
+type ImageState = {
+    type: 'image'
+    url: string
+}
+
+export type ElementState = {
+    top: number
+    left: number
+} & (RectangleState | ImageState)
+
+export const elementState = atomFamily<ElementState, number>({
     key: 'element',
     default: () => ({
+        type: 'rectangle',
         top: 0,
         left: 0,
         color: randomMC.getColor(),
@@ -52,6 +62,8 @@ export const selectedElementIdState = atom<null | number>({
 export const Element: React.FC<ElementProps> = ({id}) => {
     const [element, setElement] = useRecoilState(elementState(id))
     const setSelectedElement = useSetRecoilState(selectedElementIdState)
+
+    if (element.type !== 'rectangle') return null
 
     return (
         <Container

@@ -1,8 +1,11 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import {Sidebar, Title} from './ui'
 import styled from 'styled-components'
 import {FiSquare, FiImage} from 'react-icons/fi'
-import {ElementsContext} from './App'
+import {useRecoilCallback, useRecoilState} from 'recoil'
+import {ElementType, elementsState, elementState} from './state'
+// @ts-ignore
+import randomMC from 'random-material-color'
 
 const InsertButton = styled.button`
     width: 60px;
@@ -17,18 +20,42 @@ const InsertButton = styled.button`
     border: 0;
 `
 
+const useInsertElement = () => {
+    const [elements, setElements] = useRecoilState(elementsState)
+
+    return useRecoilCallback(
+        ({set}) => {
+            return (type: ElementType) => {
+                const newId = elements.length
+
+                setElements((elements) => [...elements, newId])
+
+                if (type === 'rectangle') {
+                    set(elementState(newId), {
+                        type,
+                        style: {
+                            top: 0,
+                            left: 0,
+                            width: 200,
+                            height: 170,
+                        },
+                        color: randomMC.getColor({shades: ['500']}),
+                    })
+                }
+            }
+        },
+        [elements],
+    )
+}
+
 export const LeftSidebar: React.FC = () => {
-    const {setElements} = useContext(ElementsContext)
+    const insertElement = useInsertElement()
 
     return (
         <Sidebar>
             <Title>Insert</Title>
             <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-                <InsertButton
-                    onClick={() => {
-                        setElements((elements) => [...elements, elements.length])
-                    }}
-                >
+                <InsertButton onClick={() => insertElement('rectangle')}>
                     <FiSquare color="white" size={35} />
                 </InsertButton>
                 <div style={{width: 15}} />

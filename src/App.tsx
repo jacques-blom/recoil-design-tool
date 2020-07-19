@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 import {Canvas} from './Canvas'
@@ -14,28 +14,14 @@ const Container = styled.div`
     height: 100vh;
 `
 
-type ElementsContext = {
-    elements: number[]
-    setElements: React.Dispatch<React.SetStateAction<number[]>>
-}
-
-export const ElementsContext = React.createContext<ElementsContext>({
-    elements: [],
-    setElements: () => {},
-})
-
 const App: React.FC = () => {
-    const [elements, setElements] = useState<number[]>([])
-
     return (
-        <ElementsContext.Provider value={{elements, setElements}}>
-            <Container>
-                <LeftSidebar />
-                <Canvas />
-                <RightSidebar />
-                <GlobalStyles />
-            </Container>
-        </ElementsContext.Provider>
+        <Container>
+            <LeftSidebar />
+            <Canvas />
+            <RightSidebar />
+            <GlobalStyles />
+        </Container>
     )
 }
 

@@ -2,6 +2,13 @@
 import randomMC from 'random-material-color'
 import {atomFamily, atom, selectorFamily} from 'recoil'
 
+export const elementsState = atom<number[]>({
+    key: 'elements',
+    default: [],
+})
+
+export type ElementType = 'rectangle' | 'image'
+
 type RectangleState = {
     type: 'rectangle'
     color: string
@@ -13,6 +20,7 @@ type ImageState = {
 }
 
 export type ElementState = {
+    type: ElementType
     style: {
         top: number
         left: number

@@ -1,7 +1,8 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import {Element} from './Element'
-import {ElementsContext} from './App'
+import {useRecoilValue, useSetRecoilState} from 'recoil'
+import {elementsState, selectedElementIdState} from './state'
 
 const CanvasContainer = styled.div`
     flex: 1;
@@ -9,10 +10,17 @@ const CanvasContainer = styled.div`
 `
 
 export const Canvas: React.FC = () => {
-    const {elements} = useContext(ElementsContext)
+    const elements = useRecoilValue(elementsState)
+    const setSelectedElement = useSetRecoilState(selectedElementIdState)
 
     return (
-        <CanvasContainer>
+        <CanvasContainer
+            onClick={(e) => {
+                if (e.currentTarget === e.target) {
+                    setSelectedElement(null)
+                }
+            }}
+        >
             {elements.map((element) => {
                 return <Element key={element} id={element} />
             })}

@@ -50,7 +50,7 @@ export const elementState = atomFamily<ElementState, number>({
         type: 'rectangle',
         top: 0,
         left: 0,
-        color: randomMC.getColor({shades: ['700']}),
+        color: randomMC.getColor({shades: ['500']}),
     }),
 })
 

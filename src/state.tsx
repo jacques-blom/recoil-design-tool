@@ -16,7 +16,7 @@ type RectangleState = {
 
 type ImageState = {
     type: 'image'
-    url: string
+    url: string | null
 }
 
 export type ElementState = {
@@ -29,16 +29,18 @@ export type ElementState = {
     }
 } & (RectangleState | ImageState)
 
+export const defaultStyle = {
+    top: 0,
+    left: 0,
+    width: 200,
+    height: 170,
+}
+
 export const elementState = atomFamily<ElementState, number>({
     key: 'element',
     default: () => ({
         type: 'rectangle',
-        style: {
-            top: 0,
-            left: 0,
-            width: 200,
-            height: 170,
-        },
+        style: defaultStyle,
         color: randomMC.getColor({shades: ['500']}),
     }),
 })

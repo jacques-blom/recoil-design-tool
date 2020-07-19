@@ -3,7 +3,7 @@ import {Sidebar, Title} from './ui'
 import styled from 'styled-components'
 import {FiSquare, FiImage} from 'react-icons/fi'
 import {useRecoilCallback, useRecoilState} from 'recoil'
-import {ElementType, elementsState, elementState} from './state'
+import {ElementType, elementsState, elementState, defaultStyle} from './state'
 // @ts-ignore
 import randomMC from 'random-material-color'
 
@@ -33,12 +33,7 @@ const useInsertElement = () => {
                 if (type === 'rectangle') {
                     set(elementState(newId), {
                         type,
-                        style: {
-                            top: 0,
-                            left: 0,
-                            width: 200,
-                            height: 170,
-                        },
+                        style: defaultStyle,
                         color: randomMC.getColor({shades: ['500']}),
                     })
                 }

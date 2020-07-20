@@ -24,16 +24,13 @@ const run = async (seed) => {
 
             return cachedImage
         },
-        {
-            retries: 3,
-        },
+        {retries: 3},
     )
 
     const location = cachedImage.Item.location.S
     const id = location.split('id/')[1].split('/')[0]
 
     const {data} = await axios.get(`https://picsum.photos/id/${id}/info`)
-
     return data
 }
 

@@ -10,7 +10,7 @@ const dynamodbClient = new AWS.DynamoDB({
 
 const run = async (seed) => {
     const cachedImage = await retry(
-        async (bail) => {
+        async () => {
             const cachedImage = await dynamodbClient
                 .getItem({
                     TableName: 'recoil-design-tool-images',
@@ -19,14 +19,13 @@ const run = async (seed) => {
                 .promise()
 
             if (!cachedImage.Item) {
-                bail(new Error('Not found'))
-                return
+                throw new Error('Not found')
             }
 
             return cachedImage
         },
         {
-            retries: 5,
+            retries: 3,
         },
     )
 

@@ -26,7 +26,7 @@ const run = async (seed) => {
             return cachedImage
         },
         {
-            retries: 3,
+            retries: 5,
         },
     )
 
@@ -62,6 +62,9 @@ exports.handler = async function (event) {
         return {
             statusCode: 500,
             body: 'Internal Server Error',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+            },
         }
     }
 }

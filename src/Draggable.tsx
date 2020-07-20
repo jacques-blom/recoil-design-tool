@@ -2,6 +2,7 @@ import React from 'react'
 import {DraggableCore} from 'react-draggable'
 import {useSetRecoilState} from 'recoil'
 import {elementState} from './state'
+import {useDelay} from './utils'
 
 type DraggableProps = {
     id: number
@@ -11,12 +12,13 @@ type DraggableProps = {
 
 export const Draggable: React.FC<DraggableProps> = ({id, mouseDown, setMouseDown, children}) => {
     const setElement = useSetRecoilState(elementState(id))
+    const setMouseDownDelayed = useDelay(setMouseDown, 100)
 
     return (
         <DraggableCore
             scale={mouseDown ? 1.1 : 1}
-            onMouseDown={() => setMouseDown(true)}
-            onStop={() => setMouseDown(false)}
+            onMouseDown={() => setMouseDownDelayed(true)}
+            onStop={() => setMouseDownDelayed(false)}
             onDrag={(e: any) => {
                 setElement((element) => ({
                     ...element,

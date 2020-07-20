@@ -2,12 +2,13 @@ import React, {useRef, useState} from 'react'
 import styled from 'styled-components'
 import useOnClickOutside from 'use-onclickoutside'
 import {SketchPicker} from 'react-color'
+import {colors} from './ui'
 
 const Color = styled.div`
     width: 40px;
     height: 30px;
-    border-radius: 3px;
-    border: 1px solid #ccc;
+    border-radius: 10px;
+    border: 1px solid ${colors.darkGray};
     margin-bottom: 15px;
 `
 

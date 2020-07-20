@@ -1,9 +1,16 @@
 import styled, {createGlobalStyle} from 'styled-components'
 
+export const colors = {
+    darkGray: '#1D1E1F',
+    lightGray: '#2e2f30',
+    primary: '#00adff',
+    primaryLight: '#89c5e2',
+}
+
 export const Sidebar = styled.div`
     width: 300px;
     height: 100%;
-    background-color: #2e2f30;
+    background-color: ${colors.lightGray};
     padding: 20px;
 `
 
@@ -22,7 +29,7 @@ export const GlobalStyles = createGlobalStyle`
             sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        background-color: #1D1E1F;
+        background-color: ${colors.darkGray};
     }
 
     * {

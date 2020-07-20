@@ -1,5 +1,5 @@
 import React from 'react'
-import {Sidebar, Title} from './ui'
+import {Sidebar, Title, colors} from './ui'
 import styled from 'styled-components'
 import {ColorPicker} from './ColorPicker'
 import {useRecoilState, selector} from 'recoil'
@@ -12,14 +12,14 @@ const InputLabel = styled.div`
 `
 
 const Input = styled.input`
-    background-color: rgba(10, 10, 10, 0.3);
-    border-radius: 15px;
+    background-color: ${colors.darkGray};
+    border-radius: 10px;
     padding: 10px;
     border: 0;
     width: 100%;
     outline: none;
     margin-bottom: 15px;
-    color: #fff;
+    color: white;
     font-size: 16px;
 `
 

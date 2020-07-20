@@ -3,6 +3,7 @@ import {Resizable as ReactResizable} from 'react-resizable'
 import styled, {css} from 'styled-components'
 import {useRecoilState, useRecoilValue} from 'recoil'
 import {elementState, isSelectedState} from './state'
+import {colors} from './ui'
 
 export const Resizable: React.FC<{id: number}> = ({children, id}) => {
     const [element, setElement] = useRecoilState(elementState(id))
@@ -28,9 +29,9 @@ export const Resizable: React.FC<{id: number}> = ({children, id}) => {
 
 const Handle = styled.span<{isVisible: boolean}>`
     position: absolute;
-    width: 8px;
-    height: 8px;
-    background-color: #b1e4ff;
+    width: 10px;
+    height: 10px;
+    background-color: ${colors.primaryLight};
     border-radius: 50%;
     opacity: 0;
     pointer-events: none;
@@ -44,47 +45,47 @@ const Handle = styled.span<{isVisible: boolean}>`
         `}
 
     &.handle-sw {
-        bottom: 1px;
-        left: 1px;
+        bottom: 0;
+        left: 0;
         cursor: sw-resize;
     }
     &.handle-se {
-        bottom: 1px;
-        right: 1px;
+        bottom: 0;
+        right: 0;
         cursor: se-resize;
     }
     &.handle-nw {
-        top: 1px;
-        left: 1px;
+        top: 0;
+        left: 0;
         cursor: nw-resize;
     }
     &.handle-ne {
-        top: 1px;
-        right: 1px;
+        top: 0;
+        right: 0;
         cursor: ne-resize;
     }
     &.handle-w,
     &.handle-e {
         top: 50%;
-        margin-top: -4px;
+        margin-top: -6px;
         cursor: ew-resize;
     }
     &.handle-w {
-        left: -4px;
+        left: -6px;
     }
     &.handle-e {
-        right: -4px;
+        right: -6px;
     }
     &.handle-n,
     &.handle-s {
         left: 50%;
-        margin-left: -4px;
+        margin-left: -6px;
         cursor: ns-resize;
     }
     &.handle-n {
-        top: -4px;
+        top: -6px;
     }
     &.handle-s {
-        bottom: -4px;
+        bottom: -6px;
     }
 `

@@ -35,7 +35,10 @@ exports.handler = async function (event) {
         return {
             statusCode: 200,
             body: JSON.stringify(body),
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            },
         }
     } catch (error) {
         if (error.message === 'Not found') {

@@ -3,7 +3,7 @@ import {Sidebar, Title, colors} from './ui'
 import styled from 'styled-components'
 import {FiSquare, FiImage} from 'react-icons/fi'
 import {useRecoilCallback, useRecoilState} from 'recoil'
-import {ElementType, elementsState, elementState, defaultStyle} from './state'
+import {elementsState, elementState, defaultStyle, ElementState} from './state'
 // @ts-ignore
 import randomMC from 'random-material-color'
 
@@ -25,7 +25,7 @@ const useInsertElement = () => {
 
     return useRecoilCallback(
         ({set}) => {
-            return (type: ElementType) => {
+            return (type: ElementState['type']) => {
                 const newId = elements.length
 
                 setElements((elements) => [...elements, newId])

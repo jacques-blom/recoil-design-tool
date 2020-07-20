@@ -1,5 +1,6 @@
 const axios = require('axios').default
 const AWS = require('aws-sdk')
+const retry = require('async-retry')
 
 const dynamodbClient = new AWS.DynamoDB({
     region: 'us-east-1',
@@ -8,16 +9,26 @@ const dynamodbClient = new AWS.DynamoDB({
 })
 
 const run = async (seed) => {
-    const cachedImage = await dynamodbClient
-        .getItem({
-            TableName: 'recoil-design-tool-images',
-            Key: {id: {S: seed}},
-        })
-        .promise()
+    const cachedImage = await retry(
+        async (bail) => {
+            const cachedImage = await dynamodbClient
+                .getItem({
+                    TableName: 'recoil-design-tool-images',
+                    Key: {id: {S: seed}},
+                })
+                .promise()
 
-    if (!cachedImage.Item) {
-        throw new Error('Not found')
-    }
+            if (!cachedImage.Item) {
+                bail(new Error('Not found'))
+                return
+            }
+
+            return cachedImage
+        },
+        {
+            retries: 3,
+        },
+    )
 
     const location = cachedImage.Item.location.S
     const id = location.split('id/')[1].split('/')[0]

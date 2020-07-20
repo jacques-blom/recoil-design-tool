@@ -21,6 +21,8 @@ type RectangleState = {
     color: string
 }
 
+export type ElementState = CommonState & RectangleState
+
 export const defaultStyle = {
     top: 20,
     left: 20,

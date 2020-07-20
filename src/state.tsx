@@ -7,27 +7,21 @@ export const elementsState = atom<number[]>({
     default: [],
 })
 
-export type ElementType = 'rectangle' | 'image'
-
-type RectangleState = {
-    type: 'rectangle'
-    color: string
-}
-
-type ImageState = {
-    type: 'image'
-    src: string
-}
-
-export type ElementState = {
-    type: ElementType
+type CommonState = {
     style: {
         top: number
         left: number
         width: number
         height: number
     }
-} & (RectangleState | ImageState)
+}
+
+type RectangleState = {
+    type: 'rectangle'
+    color: string
+}
+
+export type ElementState = CommonState & RectangleState
 
 export const defaultStyle = {
     top: 0,

@@ -21,11 +21,9 @@ type RectangleState = {
     color: string
 }
 
-export type ElementState = CommonState & RectangleState
-
 export const defaultStyle = {
-    top: 0,
-    left: 0,
+    top: 20,
+    left: 20,
     width: 200,
     height: 170,
 }

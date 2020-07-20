@@ -1,5 +1,5 @@
 import React from 'react'
-import {Sidebar, Title} from './ui'
+import {Sidebar, Title, colors} from './ui'
 import styled from 'styled-components'
 import {FiSquare, FiImage} from 'react-icons/fi'
 import {useRecoilCallback, useRecoilState} from 'recoil'
@@ -10,7 +10,7 @@ import randomMC from 'random-material-color'
 const InsertButton = styled.button`
     width: 60px;
     height: 60px;
-    background-color: rgba(10, 10, 10, 0.3);
+    background-color: ${colors.darkGray};
     border-radius: 15px;
     display: flex;
     align-items: center;

@@ -1,36 +1,35 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import {Canvas} from './Canvas'
-import {LeftSidebar} from './LeftSidebar'
-import {RightSidebar} from './RightSidebar'
-import {GlobalStyles} from './ui'
+import {LeftSidebar} from './LeftSidebar/LeftSidebar'
+import {RightSidebar} from './RightSidebar/RightSidebar'
+import {GlobalStyles} from './ui/GlobalStyles'
 import {RecoilRoot} from 'recoil'
 
-const Container = styled.div`
+const AppContainer = styled.div`
     display: flex;
     flex-direction: row;
     width: 100vw;
     height: 100vh;
 `
 
-const App: React.FC = () => {
-    return (
-        <Container>
-            <LeftSidebar />
-            <Canvas />
-            <RightSidebar />
-            <GlobalStyles />
-        </Container>
-    )
-}
+const App: React.FC = () => (
+    <AppContainer>
+        <LeftSidebar />
+        <Canvas />
+        <RightSidebar />
+    </AppContainer>
+)
 
-function Root() {
-    return (
-        <RecoilRoot>
-            <App />
-        </RecoilRoot>
-    )
-}
+/**
+ * An app that uses Recoil needs to be wrapped
+ * in a single RecoilRoot component
+ */
+const Root = () => (
+    <RecoilRoot>
+        <App />
+        <GlobalStyles />
+    </RecoilRoot>
+)
 
 export default Root

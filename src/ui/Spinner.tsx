@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, {keyframes} from 'styled-components'
-import {colors} from './ui'
+import {colors} from './constants'
 
 const rotator = keyframes`
     0% {

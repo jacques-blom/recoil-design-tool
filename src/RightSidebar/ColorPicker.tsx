@@ -2,14 +2,12 @@ import React, {useRef, useState} from 'react'
 import styled from 'styled-components'
 import useOnClickOutside from 'use-onclickoutside'
 import {SketchPicker} from 'react-color'
-import {colors} from './ui'
+import {Label} from '../ui/Typography'
 
 const Color = styled.div`
-    width: 40px;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid ${colors.darkGray};
-    margin-bottom: 15px;
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
 `
 
 const Popover = styled.div`
@@ -25,7 +23,8 @@ export const ColorPicker: React.FC<{value: string; onChange: (value: string) => 
 
     return (
         <div>
-            <div ref={ref} style={{display: 'inline-block'}}>
+            <Label>Color</Label>
+            <div ref={ref} style={{width: 60, height: 60}}>
                 <Color style={{backgroundColor: value}} onClick={() => setPickerVisible(!pickerVisible)} />
                 <div style={{position: 'relative'}}>
                     {pickerVisible && (

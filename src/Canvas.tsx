@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import {Element} from './Element'
+import {Element} from './Element/Element'
 import {useRecoilValue, useSetRecoilState} from 'recoil'
-import {elementsState, selectedElementIdState} from './state'
+import {elementsState, selectedElementIdState} from './Element/elementState'
 
 const CanvasContainer = styled.div`
     flex: 1;
@@ -17,12 +17,13 @@ export const Canvas: React.FC = () => {
         <CanvasContainer
             onClick={(e) => {
                 if (e.currentTarget === e.target) {
+                    // Deselect the element when clicking on CanvasContainer
                     setSelectedElement(null)
                 }
             }}
         >
             {elements.map((element) => {
-                return <Element key={element} id={element} />
+                return <Element id={element} />
             })}
         </CanvasContainer>
     )

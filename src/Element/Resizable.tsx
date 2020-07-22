@@ -2,8 +2,8 @@ import React from 'react'
 import {Resizable as ReactResizable} from 'react-resizable'
 import styled, {css} from 'styled-components'
 import {useRecoilState, useRecoilValue} from 'recoil'
-import {elementState, isSelectedState} from './state'
-import {colors} from './ui'
+import {elementState, isSelectedState} from './elementState'
+import {colors} from '../ui/constants'
 
 export const Resizable: React.FC<{id: number}> = ({children, id}) => {
     const [element, setElement] = useRecoilState(elementState(id))
@@ -16,7 +16,11 @@ export const Resizable: React.FC<{id: number}> = ({children, id}) => {
             onResize={(_, {size}) => {
                 setElement((element) => ({
                     ...element,
-                    style: {...element.style, ...size},
+                    style: {
+                        ...element.style,
+                        width: Math.round(size.width),
+                        height: Math.round(size.height),
+                    },
                 }))
             }}
             resizeHandles={['sw', 'se', 'nw', 'ne', 'w', 'e', 'n', 's']}

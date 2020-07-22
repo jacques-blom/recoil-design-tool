@@ -2,9 +2,9 @@ import React, {useState} from 'react'
 import styled, {css} from 'styled-components'
 import {useSetRecoilState, useRecoilValue} from 'recoil'
 import {Resizable} from './Resizable'
-import {elementState, selectedElementIdState, isSelectedState} from './state'
+import {elementState, selectedElementIdState, isSelectedState} from './elementState'
 import {Draggable} from './Draggable'
-import {colors} from './ui'
+import {colors} from '../ui/constants'
 
 const Container = styled.div<{mouseDown: boolean; isSelected: boolean}>`
     position: absolute;
@@ -39,6 +39,10 @@ type ElementProps = {
     style?: React.CSSProperties
 }
 
+/**
+ * Provides the basic styling and common functionality
+ * (dragging / resizing / mouseDown state / selected state) for Elements.
+ */
 export const ElementContainer: React.FC<ElementProps> = ({id, style, children}) => {
     const element = useRecoilValue(elementState(id))
     const [mouseDown, setMouseDown] = useState(false)

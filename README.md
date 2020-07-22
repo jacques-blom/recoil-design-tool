@@ -1,6 +1,6 @@
-# 🚀 Recoil Design Tool - Example App
+# 🎨 Recoil Design Tool
 
-A simple design tool to showcase [Recoil's](https://recoiljs.org/) atomFamily.
+A simple example design tool, built using Recoil and React Suspense.
 
 Find the [tutorial video here](https://www.youtube.com/watch?v=KBE7Ezn7h0A):
 

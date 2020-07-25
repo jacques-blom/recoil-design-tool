@@ -2,9 +2,9 @@
 
 A simple example design tool, built using Recoil and React Suspense.
 
-Find the [tutorial video here](https://www.youtube.com/watch?v=KBE7Ezn7h0A):
+Find the [tutorial videos here](https://www.youtube.com/playlist?list=PLY-nQKxN_zxBmZJBXQYPQOqOI5C6IdNxH):
 
-<a href="https://youtu.be/9JVE8OGRSlA"><img alt="Click here for the tutorial video" src="https://raw.githubusercontent.com/jacques-blom/recoil-design-tool/01-context/video.png" width="300" /></a>
+<a href="https://www.youtube.com/playlist?list=PLY-nQKxN_zxBmZJBXQYPQOqOI5C6IdNxH"><img alt="Click here for the tutorial videos" src="https://raw.githubusercontent.com/jacques-blom/recoil-design-tool/01-context/video.png" width="300" /></a>
 
 ## To get started
 
@@ -20,6 +20,8 @@ git clone git@github.com:jacques-blom/recoil-design-tool.git
 git checkout 00-useState # This is the app implemented using React State (clone this to follow along with the video)
 git checkout 01-context # This is the app implemented using React Context
 git checkout 02-recoil # This is the app implemented using Recoil
+git checkout 03-data-fetching # This is the starting point for the Data Fetching video
+git checkout 04-data-fetching-part-1-complete # This is the app with data fetching
 ```
 
 3. Install dependencies using Yarn

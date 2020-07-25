@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 import {useRecoilValue} from 'recoil'
 import {elementState} from './elementState'
 import {ElementContainer} from './ElementContainer'
 import hexToRgba from 'hex-to-rgba'
 import {Image} from './Image'
+import {ElementFallback} from './ElementFallback'
 
 export const Element: React.FC<{id: number}> = ({id}) => {
     const element = useRecoilValue(elementState(id))
@@ -11,7 +12,9 @@ export const Element: React.FC<{id: number}> = ({id}) => {
 
     return (
         <ElementContainer id={id} style={{backgroundColor}}>
-            <Image id={id} />
+            <Suspense fallback={<ElementFallback />}>
+                <Image id={id} />
+            </Suspense>
         </ElementContainer>
     )
 }

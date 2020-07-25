@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 import styled from 'styled-components'
 import {Canvas} from './Canvas'
 import {LeftSidebar} from './LeftSidebar/LeftSidebar'
 import {RightSidebar} from './RightSidebar/RightSidebar'
 import {GlobalStyles} from './ui/GlobalStyles'
 import {RecoilRoot} from 'recoil'
+import {CenteredLoading} from './ui/CenteredLoading'
 
 const AppContainer = styled.div`
     display: flex;
@@ -14,11 +15,13 @@ const AppContainer = styled.div`
 `
 
 const App: React.FC = () => (
-    <AppContainer>
-        <LeftSidebar />
-        <Canvas />
-        <RightSidebar />
-    </AppContainer>
+    <Suspense fallback={<CenteredLoading />}>
+        <AppContainer>
+            <LeftSidebar />
+            <Canvas />
+            <RightSidebar />
+        </AppContainer>
+    </Suspense>
 )
 
 /**

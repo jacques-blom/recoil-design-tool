@@ -13,6 +13,7 @@ export const Resizable: React.FC<{id: number}> = ({children, id}) => {
         <ReactResizable
             width={element.style.width}
             height={element.style.height}
+            lockAspectRatio={element.type === 'image'}
             onResize={(_, {size}) => {
                 setElement((element) => ({
                     ...element,

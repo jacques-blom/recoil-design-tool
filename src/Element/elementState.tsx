@@ -1,4 +1,3 @@
-// @ts-ignore
 import randomMC from 'random-material-color'
 import {atomFamily, atom, selectorFamily, selector} from 'recoil'
 
@@ -26,7 +25,13 @@ type RectangleState = {
     color: string
 }
 
-export type ElementState = CommonState & RectangleState
+type ImageState = {
+    type: 'image'
+    src: string
+    seed: number
+}
+
+export type ElementState = CommonState & (RectangleState | ImageState)
 
 export const defaultStyle = {
     top: 20,

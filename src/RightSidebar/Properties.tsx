@@ -4,6 +4,8 @@ import {useRecoilState} from 'recoil'
 import {SidebarSection} from '../ui/Sidebar'
 import {selectedElementState} from '../Element/elementState'
 import {StyleInput} from './StyleInput'
+import {RefreshButton} from './RefreshButton'
+import {getRandomImageUrl} from '../utils'
 
 export const Properties: React.FC = () => {
     const [selectedElement, setSelectedElement] = useRecoilState(selectedElementState)
@@ -19,6 +21,19 @@ export const Properties: React.FC = () => {
                         setSelectedElement({
                             ...selectedElement,
                             color,
+                        })
+                    }}
+                />
+            )}
+            {selectedElement.type === 'image' && (
+                <RefreshButton
+                    onClick={() => {
+                        const randomImage = getRandomImageUrl()
+
+                        setSelectedElement({
+                            ...selectedElement,
+                            src: randomImage.src,
+                            seed: randomImage.seed,
                         })
                     }}
                 />

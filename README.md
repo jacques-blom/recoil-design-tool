@@ -21,7 +21,8 @@ git checkout 00-useState # This is the app implemented using React State (clone 
 git checkout 01-context # This is the app implemented using React Context
 git checkout 02-recoil # This is the app implemented using Recoil
 git checkout 03-data-fetching # This is the starting point for the Data Fetching video
-git checkout 04-data-fetching-part-1-complete # This is the app with data fetching
+git checkout 04-data-fetching-part-1-complete # This is the completed app after Data Fetching Part 1
+git checkout 05-data-fetching-part-2-complete # This is the completed app after Data Fetching Part 2
 ```
 
 3. Install dependencies using Yarn

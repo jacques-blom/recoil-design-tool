@@ -2,9 +2,11 @@
 
 A simple example design tool, built using Recoil and React Suspense.
 
-Find the [tutorial videos here](https://www.youtube.com/playlist?list=PLY-nQKxN_zxBmZJBXQYPQOqOI5C6IdNxH):
+Check out the [live demo here](https://recoil-design-tool.jacquesblom.com/).
 
-<a href="https://www.youtube.com/playlist?list=PLY-nQKxN_zxBmZJBXQYPQOqOI5C6IdNxH"><img alt="Click here for the tutorial videos" src="https://raw.githubusercontent.com/jacques-blom/recoil-design-tool/01-context/video.png" width="300" /></a>
+Find the [tutorial videos here](https://www.youtube.com/watch?v=Hkd9gMYuYu4&list=PLY-nQKxN_zxBmZJBXQYPQOqOI5C6IdNxH&index=2):
+
+<a href="https://www.youtube.com/watch?v=Hkd9gMYuYu4&list=PLY-nQKxN_zxBmZJBXQYPQOqOI5C6IdNxH&index=2"><img alt="Click here for the tutorial videos" src="https://raw.githubusercontent.com/jacques-blom/recoil-design-tool/01-context/video.png" width="300" /></a>
 
 ## To get started
 

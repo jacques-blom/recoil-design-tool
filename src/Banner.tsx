@@ -31,8 +31,8 @@ export const Banner: React.FC = () => {
             <div>This design tool was built to show how to use Recoil and React Suspense.</div>
             <div>
                 Check out the tutorial video series{' '}
-                <Link href="https://www.youtube.com/playlist?list=PLY-nQKxN_zxBmZJBXQYPQOqOI5C6IdNxH" /> and the code{' '}
-                <Link href="https://github.com/jacques-blom/recoil-design-tool" />.
+                <Link href="https://www.youtube.com/watch?v=Hkd9gMYuYu4&list=PLY-nQKxN_zxBmZJBXQYPQOqOI5C6IdNxH&index=2" />{' '}
+                and the code <Link href="https://github.com/jacques-blom/recoil-design-tool" />.
             </div>
         </Container>
     )

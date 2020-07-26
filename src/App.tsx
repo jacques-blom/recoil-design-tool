@@ -6,20 +6,29 @@ import {RightSidebar} from './RightSidebar/RightSidebar'
 import {GlobalStyles} from './ui/GlobalStyles'
 import {RecoilRoot} from 'recoil'
 import {CenteredLoading} from './ui/CenteredLoading'
+import {Banner} from './Banner'
 
 const AppContainer = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100vw;
     height: 100vh;
+`
+
+const AppColumns = styled.div`
+    display: flex;
+    flex: 1;
 `
 
 const App: React.FC = () => (
     <Suspense fallback={<CenteredLoading />}>
         <AppContainer>
-            <LeftSidebar />
-            <Canvas />
-            <RightSidebar />
+            <Banner />
+            <AppColumns>
+                <LeftSidebar />
+                <Canvas />
+                <RightSidebar />
+            </AppColumns>
         </AppContainer>
     </Suspense>
 )

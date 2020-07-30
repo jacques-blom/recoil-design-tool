@@ -6,13 +6,17 @@ import {useRef, useEffect} from 'react'
 export const getImageDimensions = (src: string) => {
     return new Promise<{width: number; height: number}>((resolve, reject) => {
         const image = new Image()
+        const resolveDimesions = () => resolve({width: image.width, height: image.height})
+        image.src = src
+        if (image.complete) {
+            return resolveDimesions()
+        }
         image.onload = () => {
-            resolve({width: image.width, height: image.height})
+            resolveDimesions()
         }
         image.onerror = (error) => {
             reject(error)
         }
-        image.src = src
     })
 }
 

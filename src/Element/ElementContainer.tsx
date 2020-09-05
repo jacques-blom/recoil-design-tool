@@ -2,9 +2,10 @@ import React, {useState} from 'react'
 import styled, {css} from 'styled-components'
 import {useSetRecoilState, useRecoilValue} from 'recoil'
 import {Resizable} from './Resizable'
-import {elementState, selectedElementIdState, isSelectedState} from './elementState'
+import {elementState, selectedElementIdsState, isSelectedState} from './elementState'
 import {Draggable} from './Draggable'
 import {colors} from '../ui/constants'
+import {useShiftKeyPressed} from './useShftKeyPressed'
 
 const Container = styled.div<{mouseDown: boolean; isSelected: boolean}>`
     position: absolute;
@@ -46,8 +47,9 @@ type ElementProps = {
 export const ElementContainer: React.FC<ElementProps> = ({id, style, children}) => {
     const element = useRecoilValue(elementState(id))
     const [mouseDown, setMouseDown] = useState(false)
-    const setSelectedElement = useSetRecoilState(selectedElementIdState)
+    const setSelectedElement = useSetRecoilState(selectedElementIdsState)
     const isSelected = useRecoilValue(isSelectedState(id))
+    const shiftKeyPressed = useShiftKeyPressed()
 
     return (
         <Resizable id={id}>
@@ -55,7 +57,18 @@ export const ElementContainer: React.FC<ElementProps> = ({id, style, children}) 
                 style={{...element.style, ...style}}
                 mouseDown={mouseDown}
                 isSelected={isSelected}
-                onMouseDown={() => setSelectedElement(id)}
+                onMouseDown={() => {
+                    setSelectedElement((ids) => {
+                        // Do nothing if the element is already selected
+                        if (isSelected) return ids
+
+                        // Add this element to the selection if shift is pressed
+                        if (shiftKeyPressed) return [...ids, id]
+
+                        // Otherwise, make this one the only selected element
+                        return [id]
+                    })
+                }}
             >
                 <Draggable id={id} mouseDown={mouseDown} setMouseDown={setMouseDown}>
                     <InnerContainer>{children}</InnerContainer>

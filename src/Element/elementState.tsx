@@ -57,9 +57,9 @@ export const elementState = atomFamily<ElementState, number>({
 /**
  * An atom that stores which Element is currently selected.
  */
-export const selectedElementIdState = atom<null | number>({
+export const selectedElementIdsState = atom<number[]>({
     key: 'selectedElementId',
-    default: null,
+    default: [],
 })
 
 /**
@@ -68,17 +68,17 @@ export const selectedElementIdState = atom<null | number>({
 export const selectedElementState = selector<ElementState | undefined>({
     key: 'selectedElement',
     get: ({get}) => {
-        const id = get(selectedElementIdState)
+        const ids = get(selectedElementIdsState)
 
-        if (id != null) {
-            return get(elementState(id))
+        if (ids.length === 1) {
+            return get(elementState(ids[0]))
         }
     },
     set: ({set, get}, newElementValue) => {
-        const id = get(selectedElementIdState)
+        const ids = get(selectedElementIdsState)
 
-        if (id != null && newElementValue) {
-            set(elementState(id), newElementValue)
+        if (ids.length === 1 && newElementValue) {
+            set(elementState(ids[0]), newElementValue)
         }
     },
 })
@@ -91,8 +91,8 @@ export const selectedElementState = selector<ElementState | undefined>({
  */
 export const isSelectedState = selectorFamily({
     key: 'isSelected',
-    get: (id) => ({get}) => {
-        const selectedElementId = get(selectedElementIdState)
-        return selectedElementId === id
+    get: (id: number) => ({get}) => {
+        const selectedElementIds = get(selectedElementIdsState)
+        return selectedElementIds.includes(id)
     },
 })

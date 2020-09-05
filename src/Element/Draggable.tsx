@@ -1,7 +1,7 @@
 import React from 'react'
 import {DraggableCore} from 'react-draggable'
-import {useSetRecoilState} from 'recoil'
-import {elementState} from './elementState'
+import {useRecoilCallback, useRecoilValue} from 'recoil'
+import {elementState, selectedElementIdsState} from './elementState'
 import {useDebounce} from '../utils'
 
 type DraggableProps = {
@@ -11,8 +11,27 @@ type DraggableProps = {
 }
 
 export const Draggable: React.FC<DraggableProps> = ({id, mouseDown, setMouseDown, children}) => {
-    const setElement = useSetRecoilState(elementState(id))
     const setMouseDownDelayed = useDebounce(setMouseDown, 100)
+    const selectedElementIds = useRecoilValue(selectedElementIdsState)
+
+    const setElements = useRecoilCallback(
+        ({set}) => {
+            return (movementX: number, movementY: number) => {
+                // Move all the selected elements
+                for (const id of selectedElementIds) {
+                    set(elementState(id), (element) => ({
+                        ...element,
+                        style: {
+                            ...element.style,
+                            top: element.style.top + movementY,
+                            left: element.style.left + movementX,
+                        },
+                    }))
+                }
+            }
+        },
+        [selectedElementIds],
+    )
 
     return (
         <DraggableCore
@@ -20,14 +39,7 @@ export const Draggable: React.FC<DraggableProps> = ({id, mouseDown, setMouseDown
             onMouseDown={() => setMouseDownDelayed(true)}
             onStop={() => setMouseDownDelayed(false)}
             onDrag={(e: any) => {
-                setElement((element) => ({
-                    ...element,
-                    style: {
-                        ...element.style,
-                        top: element.style.top + e.movementY,
-                        left: element.style.left + e.movementX,
-                    },
-                }))
+                setElements(e.movementX, e.movementY)
             }}
         >
             {children}

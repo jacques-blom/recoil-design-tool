@@ -26,27 +26,27 @@ jobs:
               run: terraform init
               working-directory: infra
               env:
-                  AWS_ACCESS_KEY_ID: ${{ secrets.PR_AWS_ACCESS_KEY_ID }}
-                  AWS_SECRET_ACCESS_KEY: ${{ secrets.PR_AWS_SECRET_ACCESS_KEY }}
+                  AWS_ACCESS_KEY_ID: ${{ secrets.ADMIN_AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.ADMIN_AWS_SECRET_ACCESS_KEY }}
 
             - name: Terraform Format
               run: terraform fmt -check
               working-directory: infra
               env:
-                  AWS_ACCESS_KEY_ID: ${{ secrets.PR_AWS_ACCESS_KEY_ID }}
-                  AWS_SECRET_ACCESS_KEY: ${{ secrets.PR_AWS_SECRET_ACCESS_KEY }}
+                  AWS_ACCESS_KEY_ID: ${{ secrets.ADMIN_AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.ADMIN_AWS_SECRET_ACCESS_KEY }}
 
             - name: Terraform Plan
               run: terraform plan
               working-directory: infra
               env:
-                  AWS_ACCESS_KEY_ID: ${{ secrets.PR_AWS_ACCESS_KEY_ID }}
-                  AWS_SECRET_ACCESS_KEY: ${{ secrets.PR_AWS_SECRET_ACCESS_KEY }}
+                  AWS_ACCESS_KEY_ID: ${{ secrets.ADMIN_AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.ADMIN_AWS_SECRET_ACCESS_KEY }}
 
             - name: Terraform Apply
               if: github.ref == 'refs/heads/main' && github.event_name == 'push'
               run: terraform apply -auto-approve
               working-directory: infra
               env:
-                  AWS_ACCESS_KEY_ID: ${{ secrets.PR_AWS_ACCESS_KEY_ID }}
-                  AWS_SECRET_ACCESS_KEY: ${{ secrets.PR_AWS_SECRET_ACCESS_KEY }}
+                  AWS_ACCESS_KEY_ID: ${{ secrets.ADMIN_AWS_ACCESS_KEY_ID }}
+                  AWS_SECRET_ACCESS_KEY: ${{ secrets.ADMIN_AWS_SECRET_ACCESS_KEY }}

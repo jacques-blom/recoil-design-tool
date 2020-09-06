@@ -26,14 +26,14 @@ jobs:
                   AWS_SECRET_ACCESS_KEY: ${{ secrets.PR_AWS_SECRET_ACCESS_KEY }}
 
             - name: Terraform Init
-              run: terraform init
+              run: terraform init infra
 
             - name: Terraform Format
-              run: terraform fmt -check
+              run: terraform fmt infra -check
 
             - name: Terraform Plan
-              run: terraform plan
+              run: terraform plan infra
 
             - name: Terraform Apply
               if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-              run: terraform apply -auto-approve
+              run: terraform apply infra -auto-approve

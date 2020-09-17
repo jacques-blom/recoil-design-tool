@@ -1,0 +1,23 @@
+name: 'Terraform'
+
+on:
+    pull_request:
+
+jobs:
+    coverage:
+        name: 'Code Coverage'
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                shell: bash
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+
+            - name: comment PR
+              uses: unsplash/comment-on-pr@master
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  msg: 'Check out this message!'

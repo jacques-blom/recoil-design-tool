@@ -1,4 +1,4 @@
-name: 'Terraform'
+name: 'Code Coverage'
 
 on:
     pull_request:
@@ -20,4 +20,4 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  msg: 'Check out this message!'
+                  msg: ${{ node coverage.js }}

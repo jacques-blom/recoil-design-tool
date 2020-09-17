@@ -20,6 +20,8 @@ jobs:
               with:
                   node-version: '12'
 
+            - run: yarn
+
             - name: Generate Coverage
               id: coverage
               run: echo "::set-output report=$(bash coverage.sh)"

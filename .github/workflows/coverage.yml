@@ -20,4 +20,4 @@ jobs:
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
-                  msg: ${{ node coverage.js }}
+                  msg: $(bash coverage.sh)

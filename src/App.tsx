@@ -8,6 +8,8 @@ import {RecoilRoot} from 'recoil'
 import {CenteredLoading} from './ui/CenteredLoading'
 import {TopBanner, BottomBanner} from './Banner'
 
+console.log({REACT_APP_API_BASE: process.env.REACT_APP_API_BASE})
+
 const AppContainer = styled.div`
     display: flex;
     flex-direction: column;

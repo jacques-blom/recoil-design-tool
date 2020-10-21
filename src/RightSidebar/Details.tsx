@@ -3,6 +3,7 @@ import {SidebarSection} from '../ui/Sidebar'
 import {Detail, DetailFallback} from '../ui/Typography'
 import {selector, useRecoilValue} from 'recoil'
 import {selectedElementState} from '../Element/elementState'
+import {callApi} from '../api'
 
 const imageSeedState = selector({
     key: 'imageSeed',
@@ -20,9 +21,7 @@ const imageDetailsState = selector({
         const seed = get(imageSeedState)
         if (!seed) return null
 
-        return fetch(
-            `https://recoil-design-tool.jacquesblom.com/.netlify/functions/image-details/?seed=${seed}`,
-        ).then((res) => res.json())
+        return callApi('image-details', {seed})
     },
 })
 

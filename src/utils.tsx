@@ -1,4 +1,5 @@
 import {useRef, useEffect} from 'react'
+import {apiUrl} from './api'
 
 /**
  * Returns the width and height for the specified image.
@@ -46,5 +47,5 @@ export const capitalizeFirst = (string: string) => {
  */
 export const getRandomImageUrl = () => {
     const seed = Date.now()
-    return {src: `https://recoil-design-tool.jacquesblom.com/.netlify/functions/random-image/?seed=${seed}`, seed}
+    return {src: apiUrl('random-image', {seed}), seed}
 }

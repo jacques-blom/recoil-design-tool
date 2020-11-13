@@ -1,0 +1,34 @@
+name: 'Code Coverage'
+
+on:
+    pull_request:
+
+jobs:
+    coverage:
+        name: 'Code Coverage'
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                shell: bash
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+
+            - name: Setup Node
+              uses: actions/setup-node@v2-beta
+              with:
+                  node-version: '12'
+
+            - run: yarn
+
+            - name: Generate Coverage
+              id: coverage
+              run: echo "::set-output report=$(bash coverage.sh)"
+
+            - name: Comment on PR
+              uses: unsplash/comment-on-pr@master
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  msg: ${{ steps.coverage.report }}
